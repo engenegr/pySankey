@@ -41,7 +41,7 @@ def check_data_matches_labels(labels, data, side):
         if labels != data:
             msg = "\n"
             if len(labels) <= 20:
-                msg = "Labels: " + ",".join(labels) +"\n"
+                msg = "Labels: " + ",".join(labels) + "\n"
             if len(data) < 20:
                 msg += "Data: " + ",".join(data)
             raise LabelMismatch('{0} labels and data do not match.{1}'.format(side, msg))
@@ -50,7 +50,7 @@ def check_data_matches_labels(labels, data, side):
 
 def sankey(left, right, title=None, left_weight=None, right_weight=None, color_dict=None,
            left_labels=None, right_labels=None, aspect=4, right_color=False,
-           fontsize=14, figure_name=None, close_plot=False, size=(6,6), font_family="serif"):
+           fontsize=14, close_plot=False, size=(6,6), font_family="serif"):
     '''
     Make Sankey Diagram showing flow from left-->right
 
@@ -70,6 +70,9 @@ def sankey(left, right, title=None, left_weight=None, right_weight=None, color_d
         aspect = vertical extent of the diagram in units of horizontal extent
         right_color = If true, each strip in the diagram will be be colored
                     according to its left label
+	title = Title of graphic, default=None
+	size = Size of the display palette, default = 6x6
+	font_family = Font used for text in the graphic
     Ouput:
         None
     '''
@@ -240,8 +243,3 @@ def sankey(left, right, title=None, left_weight=None, right_weight=None, color_d
     plt.gcf().set_size_inches(size[0], size[1])
     
     if title: plt.title(title)
-    
-    if figure_name != None:
-        plt.savefig("{}.png".format(figure_name), bbox_inches='tight', dpi=150)
-    if close_plot:
-        plt.close()
